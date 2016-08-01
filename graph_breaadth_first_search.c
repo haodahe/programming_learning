@@ -10,28 +10,50 @@ struct {
     char introduction[50];
 } point[max];
 
-void dfs(int A[][max], int B[],  int maxb, int the_point){
-    int ii, iii;
+void bfs(int A[][max], int B[], int C[], int the_point, int number){
+    int ia, ib;
 
-    printf("%d ", the_point + 1);
+    printf("%s ", point[the_point].name);
+/*
+    for(ib = 0; ib < max; ib++)
+        printf("%d ", B[ib]);
+    printf("     ");
+
+    for(ib = 0; ib < max; ib++)
+        printf("%d ", C[ib]);
+    printf("     ");
+*/
     B[the_point] = 1;
 
-    for(ii = 0; ii < maxb; ii++)
-        if(A[the_point][ii] != 0 && B[ii] == 0)
+    for(ia = 0; ia < max; ia++)
+        if(A[the_point][ia] != 0 && B[ia] == 0){
+            C[number] = ia;
+            B[ia] = 1;
+            number++;
+        }
 /*
-            for(iii = 0; iii < maxb; iii++)
-                printf("%d ", B[iii]);
-            printf("\n");
+    for(ib = 0; ib < max; ib++)
+        printf("%d ", C[ib]);
+    printf("\n");
 */
-            dfs(A, B, maxb, ii);
+    if(C[0] != 0){
+        the_point = C[0];
+        number--;
 
+        for(ia = 0; ia < max - 1; ia++)
+            C[ia] = C[ia + 1];
 
+        C[max - 1] = 0;
+
+        bfs(A, B, C, the_point, number);
+    }
 }
 
 int main()
 {
     int ia, ib, distance, need_nu1, need_nu2;
     int chart[max][max];
+    int line_up[max];
 
     char need1[10];
     char need2[10];
@@ -42,18 +64,13 @@ int main()
             chart[ia][ib] = 0;
 
     for(ia = 0; ia < max; ia++)
-        cheak[ia] = 0;
+        cheak[ia] = line_up[ia] = 0;
 
     for(ia = 0; ia < max; ia++){
         printf("input the points(name introduction):");
         scanf("%s", point[ia].name);
         gets(point[ia].introduction);
     }
-
-/*
-    for(ia = 0; ia < max; ia++)
-        printf("%s , %s\n", point[ia].name, point[ia].introduction);
-*/
 
     for(ia = 0; ia < max; ia += 0){
         printf("input line(name1 name2 distance)('QUIT QUIT 0' for quit):");
@@ -80,6 +97,5 @@ int main()
     }
     printf("\n");
 
-    dfs(chart, cheak, max, 0);
-
+    bfs(chart, cheak, line_up, 0, 0);
 }
