@@ -9,6 +9,17 @@
 #include <queue>
 using namespace std;
 
+#ifdef ONLINE_JUDGE
+#define getchar getchar_unlocked
+#define putchar putchar_unlocked
+#define fread fread_unlocked
+#define fwrite fwrite_unlocked
+#endif
+#ifdef getchar
+#undef getchar
+#endif
+#define getchar() (*_pinp?*_pinp++:(_inp[fread(_pinp=_inp, 1, 4096, stdin)]='\0', *_pinp++))
+char _inp[4097], *_pinp=_inp;
 #define scan(x) do{while((x=getchar())<'0'); for(x-='0'; '0'<=(_=getchar()); x=(x<<3)+(x<<1)+_-'0');}while(0)
 char _;
 
