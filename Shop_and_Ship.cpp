@@ -1,3 +1,6 @@
+//The answer for CCC '09 S4 - Shop and Ship
+//https://dmoj.ca/problem/ccc09s4
+
 #include <unordered_map>
 #include <iostream>
 #include <string>
