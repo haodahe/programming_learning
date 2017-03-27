@@ -3,7 +3,7 @@ import java.lang.*;
 import java.util.Random;
 public class RandomLetterChooser extends RandomStringChooser {
     RandomLetterChooser(String a){
-        super(getSingleLetters(a)); //******** super тксц
+        super(getSingleLetters(a)); //******** using super()
     }
     
     public static String[] getSingleLetters(String str){
